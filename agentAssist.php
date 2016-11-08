@@ -586,7 +586,7 @@ class dnsLib
             print_r($hostingIssues['returnMessage']);
         }else{
             print_r($nsIssues['return'].PHP_EOL);
-            print_r($nsIssues['returnMessage']);
+            print_r($nsIssues['returnMessage'].PHP_EOL);
         }
     }
 }
