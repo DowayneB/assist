@@ -14,6 +14,8 @@ class dnsLib
         } else {
             $nameServers = FALSE;
         }
+        $nameServers = NULL;
+        $nameServers = array('ns.dns1.co.za','ns.dns2.co.za','ns1.wix.co.za','ns2.wix.co.za');
         return $nameServers;
     }
     public function getMxRecords($domain)
@@ -327,7 +329,6 @@ class dnsLib
                         $nsResult = 'NSMIXED';
                         $nsReturn['return'] = 500;
                         $nsReturn['returnMessage'][] = 'There are mixed name servers';
-
                     }
                 }
             } else {
@@ -341,7 +342,7 @@ class dnsLib
                     /** there are mixed name servers */
                     $nsResult = 'NSMIXED';
                     $nsReturn['return'] = 500;
-                    $nsReturn['returnMessage'] = 'There are mixed name servers';
+                    $nsReturn['returnMessage'][] = 'There are mixed name servers';
                 }
             }
         } else {
@@ -579,19 +580,20 @@ class dnsLib
             print_r($mxIssues['returnMessage']);
         }else{
             print_r($nsIssues['return'].PHP_EOL);
-            print_r($nsIssues['returnMessage']);
+            $message[] = 'There are problems with the name servers, MX could not be checked.';
+            print_r($message);
         }
         if (isset($hostingIssues)) {
             print_r($hostingIssues['return'].PHP_EOL);
             print_r($hostingIssues['returnMessage']);
         }else{
             print_r($nsIssues['return'].PHP_EOL);
-            print_r($nsIssues['returnMessage'].PHP_EOL);
+            $message[0] = 'There are problems with the name servers, hosting could not be checked.';
+            print_r($message);
         }
     }
 }
 
 $dnsLib = new dnsLib();
 $domain = $argv[1];
-
 $dnsLib->checkIssues($domain);
