@@ -14,8 +14,6 @@ class dnsLib
         } else {
             $nameServers = FALSE;
         }
-        $nameServers = NULL;
-        $nameServers = array('ns.dns1.co.za','ns.dns2.co.za','ns1.wix.co.za','ns2.wix.co.za');
         return $nameServers;
     }
     public function getMxRecords($domain)
